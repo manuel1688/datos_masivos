@@ -19,30 +19,30 @@ def cargar_dato(nombre, localidad, coordenada_x, coordenada_y):
         cursor = sqliteConnection.cursor()
         count = cursor.execute("""INSERT INTO sitios (nombre, localidad, coordenada_x, coordenada_y) VALUES (?, ?, ?, ?)""", (nombre, localidad, coordenada_x, coordenada_y))
         sqliteConnection.commit()
-        print("Record inserted successfully into SqliteDb_developers table ", cursor.rowcount)
+        print("agregado ", cursor.rowcount)
 
     except sqlite3.Error as error:
-        print("Error while connecting to sqlite", error)
+        print("Error conectando", error)
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection is closed")
+            print("Cerrar conexion")
 
 def init_db():
     try:
         sqliteConnection = sqlite3.connect('SQLite_Python.db')
         cursor = sqliteConnection.cursor()
-        print("Database created and Successfully Connected to SQLite")
+        print("conexion exitosa")
         cursor.execute(drop)
         cursor.execute(tabla_sitios)
         cursor.close()
 
     except sqlite3.Error as error:
-        print("Error while connecting to sqlite", error)
+        print("Error base  de dato ", error)
     finally:
         if sqliteConnection:
             sqliteConnection.close()
-            print("The SQLite connection is closed")
+            print("conexion cerrada")
 
 def extraer_datos(url):
     r = requests.get(url)
